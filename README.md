@@ -6,6 +6,8 @@ Dashboard estático (HTML, CSS e JavaScript puro, sem dependências) com calend�
 - Prova objetiva e discursiva: 24/01/2027
 - Blocos diários: teoria (90 min), questões (60 min) e revisão espaçada em 1, 7 e 30 dias (30 min)
 - Domingos: simulado, caderno de erros e redação técnica
+- Checklist por dia: três blocos, itens do conteúdo programático, questões feitas e acertos, e anotações
+- Mapa de setores: visão dos 61 dias por área, preenchidos conforme você conclui
 - Progresso salvo no navegador (`localStorage`), com exportar e importar em JSON
 - Botão **Baixar .ics** gera a agenda para importar no Google Calendar (fuso `America/Rio_Branco`)
 

@@ -1,21 +1,22 @@
 <!doctype html>
 <html lang="pt-BR"><head><meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>Plano de estudos – PCAC Perito Informática Forense</title>
+<title>Plano de estudos PCAC – Perito Informática Forense</title>
 <link rel="stylesheet" href="assets/style.css">
 </head><body><div class="wrap">
-<div class="top"><div><h1>Plano de estudos: PCAC, Perito Criminal – Informática Forense</h1>
-<div class="sub">9 de novembro de 2026 a 8 de janeiro de 2027 · 3 h por dia · prova em 24/01/2027</div></div>
-<div class="set"><label>Dias úteis <input type="time" id="wk"></label><label>Fim de semana <input type="time" id="we"></label>
-<button class="b" id="th">Tema</button><button class="b" id="ics">Baixar .ics</button><button class="b" id="ex">Exportar</button><button class="b" id="im">Importar</button><input type="file" id="fi" accept="application/json" hidden><button class="b" id="rs">Zerar progresso</button></div></div>
+<div class="top"><div><h1>Plano de estudos: Perito Criminal, Informática Forense</h1>
+<div class="sub">Polícia Civil do Acre, Edital 001/2026. De 9 de novembro de 2026 a 8 de janeiro de 2027, 3 h por dia. Prova em 24 de janeiro de 2027.</div></div>
+<div class="set"><label>Dias úteis <input type="time" id="wk"></label><label>Fins de semana <input type="time" id="we"></label>
+<button class="b pri" id="ics">Baixar .ics</button><button class="b" id="ex">Exportar</button><button class="b" id="im">Importar</button><input type="file" id="fi" accept="application/json" hidden><button class="b" id="th">Tema</button><button class="b" id="rs">Zerar</button></div></div>
 <div class="stats" id="stats"></div>
-<div class="grid"><div><div class="card" id="day"></div><div class="card" style="margin-top:14px" id="subj"></div>
-<div class="card" style="margin-top:14px"><h2>Peso da prova objetiva (100 questões, 160 pontos)</h2>
+<div class="card"><h2>Mapa de setores</h2><div id="map"></div></div>
+<div class="grid"><div class="col"><div class="card" id="day"></div><div class="card" id="subj"></div>
+<div class="card"><h2>Peso da prova objetiva</h2>
 <table><tr><th>Bloco</th><th>Questões</th><th>Pontos</th></tr>
 <tr><td>Conhecimentos específicos (peso 2)</td><td>60</td><td>120</td></tr>
 <tr><td>Básicos: português 6, lógica 6, informática 8, Acre 4</td><td>24</td><td>24</td></tr>
 <tr><td>Jurídicos: constitucional 3, administrativo 3, penal e processo penal 6, institucional 4</td><td>16</td><td>16</td></tr></table>
-<p class="sub">Para ser aprovado: mínimo de 50% dos pontos, 1 ponto em cada disciplina básica e jurídica e 2 pontos nos específicos. A discursiva (redação de 20 a 30 linhas) vale 40 pontos.</p></div></div>
+<p class="sub">Aprovação: 50% dos pontos, 1 ponto em cada disciplina básica e jurídica e 2 pontos nos específicos. A discursiva (20 a 30 linhas) vale 40 pontos.</p></div></div>
 <div class="card" id="cal"></div></div></div>
 <script src="assets/data.js"></script>
 <script src="assets/app.js"></script>
