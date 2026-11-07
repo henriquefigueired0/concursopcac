@@ -1,0 +1,161 @@
+<!doctype html>
+<html lang="pt-BR"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Plano de estudos – PCAC Perito Informática Forense</title>
+<style>
+:root{box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px);--bg:#eef2f6;--panel:#fff;--ink:#14202e;--mut:#556579;--line:#d5dde6;--E:#0a7aa3;--P:#7a4fc4;--J:#a86a0a;--B:#2a8454;--hi:#0a7aa3;color-scheme:light}
+:root[data-theme="dark"]{--bg:#0e1621;--panel:#16212f;--ink:#e6edf5;--mut:#8da0b5;--line:#25354a;--E:#4cc9f0;--P:#b794f6;--J:#f2b84b;--B:#6fcf97;--hi:#4cc9f0;color-scheme:dark}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#0e1621;--panel:#16212f;--ink:#e6edf5;--mut:#8da0b5;--line:#25354a;--E:#4cc9f0;--P:#b794f6;--J:#f2b84b;--B:#6fcf97;--hi:#4cc9f0;color-scheme:dark}}
+html{scroll-padding-top:env(safe-area-inset-top,0px)}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font:15px/1.5 ui-sans-serif,system-ui,-apple-system,"Segoe UI",Roboto,sans-serif}
+.wrap{max-width:1120px;margin:0 auto;padding:16px}
+h1{font-size:21px;margin:0}h2{font-size:15px;margin:0 0 10px}
+.sub{color:var(--mut);font-size:13px}
+.top{display:flex;justify-content:space-between;align-items:flex-start;gap:12px;flex-wrap:wrap;margin-bottom:14px}
+.stats{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-bottom:14px}
+.card{background:var(--panel);border:1px solid var(--line);border-radius:10px;padding:14px}
+.big{font:700 30px/1.1 ui-monospace,SFMono-Regular,Menlo,monospace;color:var(--hi)}
+.lab{font-size:12px;color:var(--mut)}
+.grid{display:grid;grid-template-columns:minmax(0,5fr) minmax(0,6fr);gap:14px}
+@media(max-width:820px){.grid{grid-template-columns:1fr}.stats{grid-template-columns:repeat(2,1fr)}}
+.blk{display:flex;gap:10px;padding:10px 0;border-top:1px solid var(--line)}
+.blk:first-of-type{border-top:0}
+.blk input{width:20px;height:20px;margin-top:2px;accent-color:var(--hi);flex:none}
+.blk.ok .t{text-decoration:line-through;color:var(--mut)}
+.t{font-weight:600}.tm{font:12px ui-monospace,Menlo,monospace;color:var(--mut)}
+.tag{display:inline-block;font-size:12px;padding:1px 8px;border-radius:99px;border:1px solid currentColor;margin-right:6px}
+.E{color:var(--E)}.P{color:var(--P)}.J{color:var(--J)}.B{color:var(--B)}
+.mon{margin-bottom:14px}.mon h3{font-size:14px;margin:0 0 6px;text-transform:capitalize}
+.cal{display:grid;grid-template-columns:repeat(7,1fr);gap:4px}
+.dw{font-size:11px;color:var(--mut);text-align:center}
+.c{font:inherit;position:relative;min-height:46px;padding:4px;border:1px solid var(--line);border-left:3px solid var(--line);border-radius:6px;background:var(--panel);color:var(--ink);text-align:left;cursor:pointer;font-size:13px}
+.c.out{opacity:.35}.c.sel{outline:2px solid var(--hi)}.c.today{box-shadow:inset 0 0 0 1px var(--hi)}
+.c.gE{border-left-color:var(--E)}.c.gP{border-left-color:var(--P)}.c.gJ{border-left-color:var(--J)}.c.gB{border-left-color:var(--B)}.c.gS{border-left-color:var(--mut)}
+.c.full{background:color-mix(in srgb,var(--B) 22%,var(--panel))}.c.part{background:color-mix(in srgb,var(--J) 16%,var(--panel))}
+.c small{display:block;font-size:10px;line-height:1.1;color:var(--hi);font-weight:700}
+.bar{height:8px;background:var(--line);border-radius:4px;overflow:hidden;margin:3px 0 10px}.bar i{display:block;height:100%;background:currentColor}
+table{width:100%;border-collapse:collapse;font-size:13px}td,th{padding:4px 6px;border-top:1px solid var(--line);text-align:left}
+.set{display:flex;gap:10px;flex-wrap:wrap;align-items:center;font-size:13px}
+button.b,input[type=time]{font:inherit;font-size:13px;background:var(--panel);color:var(--ink);border:1px solid var(--line);border-radius:6px;padding:4px 8px}
+button.b{cursor:pointer}
+:focus-visible{outline:2px solid var(--hi);outline-offset:2px}
+</style></head><body><div class="wrap">
+<div class="top"><div><h1>Plano de estudos: PCAC, Perito Criminal – Informática Forense</h1>
+<div class="sub">9 de novembro de 2026 a 8 de janeiro de 2027 · 3 h por dia · prova em 24/01/2027</div></div>
+<div class="set"><label>Dias úteis <input type="time" id="wk"></label><label>Fim de semana <input type="time" id="we"></label>
+<button class="b" id="th">Tema</button><button class="b" id="rs">Zerar progresso</button></div></div>
+<div class="stats" id="stats"></div>
+<div class="grid"><div><div class="card" id="day"></div><div class="card" style="margin-top:14px" id="subj"></div>
+<div class="card" style="margin-top:14px"><h2>Peso da prova objetiva (100 questões, 160 pontos)</h2>
+<table><tr><th>Bloco</th><th>Questões</th><th>Pontos</th></tr>
+<tr><td>Conhecimentos específicos (peso 2)</td><td>60</td><td>120</td></tr>
+<tr><td>Básicos: português 6, lógica 6, informática 8, Acre 4</td><td>24</td><td>24</td></tr>
+<tr><td>Jurídicos: constitucional 3, administrativo 3, penal e processo penal 6, institucional 4</td><td>16</td><td>16</td></tr></table>
+<p class="sub">Para ser aprovado: mínimo de 50% dos pontos, 1 ponto em cada disciplina básica e jurídica e 2 pontos nos específicos. A discursiva (redação de 20 a 30 linhas) vale 40 pontos.</p></div></div>
+<div class="card" id="cal"></div></div></div>
+<script>
+const T=[
+["E","Hardware","Placas-mãe, processadores, memórias, armazenamento, interfaces de E/S, alimentação"],
+["E","Fundamentos I","Arquitetura, sistemas operacionais (kernel, memória, arquivos, E/S), multicore, GPU e CUDA"],
+["E","Fundamentos II","Virtualização, contêineres, RAID, sistemas distribuídos, computação quântica"],
+["E","Sistemas de arquivos","NTFS, FAT32, exFAT, EXT3, EXT4 e XFS: organização e metadados"],
+["B","Língua Portuguesa I","Interpretação, coesão e coerência, reescrita, significação de palavras"],
+["B","Raciocínio Lógico I","Proposições, conectivos, tabelas-verdade, equivalências, argumentação"],
+["E","Windows I","Desktop e Server, usuários, permissões, registro do Windows"],
+["E","Windows II","Log de eventos do Windows, BitLocker"],
+["E","Linux I","Características, usuários, permissões, shell e comandos"],
+["E","Linux II","Configuração, administração, logs e serviços (proxy, e-mail, web, arquivos)"],
+["E","Estruturas de dados I","Listas, filas, pilhas e árvores"],
+["E","Estruturas de dados II","Busca, inserção, ordenação, complexidade, autômatos"],
+["E","Bancos de dados I","Arquitetura, modelos lógicos e físico, SGBDs relacionais, multidimensionais"],
+["E","Bancos de dados II","SQL, transações e análise de logs, NoSQL"],
+["J","Direito Constitucional","Direitos e garantias, Administração Pública (arts. 37 a 41), art. 144, Constituição do Acre"],
+["E","Linguagens I","Orientação a objetos, procedurais, compiladores e interpretadores, C e Java"],
+["E","Linguagens II","JavaScript, Python, HTML, XML, JSON, APIs REST e GraphQL, SonarQube"],
+["E","Redes I","Tipos, tecnologias e topologias, comutação, elementos de interconexão"],
+["E","Redes II","OSI e TCP/IP, Ethernet, redes sem fio, IP, TCP, UDP, ARP, DNS, DHCP, ICMP"],
+["E","Redes III","TLS, SSL, SSH, HTTP(S), e-mail, OSPF, BGP, deep e dark web, Tor, nuvem"],
+["B","Língua Portuguesa II","Sintaxe, concordância, regência, crase, pontuação, colocação pronominal"],
+["E","Segurança da informação I","ISO 27001 e 27002, desenvolvimento seguro (SDL, CLASP, OWASP Top 10), contêineres"],
+["E","Segurança da informação II","Autenticação e autorização (SSO, SAML, OAuth, FIDO2, MFA), malware"],
+["E","Segurança da informação III","OSINT, esteganografia, recuperação de dados, nuvem AWS, Azure e Google Cloud"],
+["E","Engenharia reversa I","Descompilação, debuggers, linguagem Assembly"],
+["E","Engenharia reversa II","Análise de código malicioso, ofuscação, compactadores, polimórfico, sandboxing"],
+["E","Segurança de redes I","Firewall, IDS e IPS, antivírus, EDR, XDR, SOAR, SIEM, NAT, proxy, VPN"],
+["E","Segurança de redes II","IPSEC, DNSSEC, DMARC, DKIM, SPF, análise de tráfego, Wi-Fi (WPA3, 802.1X)"],
+["E","Segurança de redes III","DoS, DDoS, spoofing, XSS, SQL injection, MITRE ATT&CK, CIS, NIST, APT"],
+["E","Criptografia I","Simétrica e assimétrica, RSA, AES, ECC, modos de operação"],
+["E","Criptografia II","Hashes, Diffie-Hellman, certificação digital, criptoanálise, protocolo Signal"],
+["B","Raciocínio Lógico II","Conjuntos, porcentagem, juros, combinatória, probabilidade, tabelas e gráficos"],
+["J","Direito Administrativo","Princípios, organização, poderes, atos, agentes, responsabilidade civil, improbidade"],
+["E","Sistemas móveis I","Android: arquitetura, permissões, sandboxing, criptografia"],
+["E","Sistemas móveis II","iOS: segurança, memória e processos, sistemas de arquivos"],
+["J","Penal e Processo Penal I","Teoria do crime, crimes contra a pessoa, patrimônio, fé pública e administração pública"],
+["J","Penal e Processo Penal II","Inquérito, provas e perícias (arts. 155 a 184 do CPP), cadeia de custódia, prisões"],
+["E","Computação forense I","Crimes cibernéticos e seus vestígios, identificação e isolamento"],
+["E","Computação forense II","Preservação e coleta de vestígio digital"],
+["E","Computação forense III","Cadeia de custódia do vestígio digital"],
+["E","Computação forense IV","Principais exames em computação forense, laudo e quesitos"],
+["E","Criptomoedas","Blockchain, Bitcoin, stablecoins, altcoins, hard e cold wallets"],
+["E","Inteligência Artificial","Aprendizado de máquina, deep learning, LLMs, IA generativa, deepfakes"],
+["E","Governança de TI","ITIL 4 e contratações de TI (Lei 14.133/2021)"],
+["E","Legislação digital","Marco Civil (Lei 12.965/2014), LGPD (Lei 13.709/2018), Lei 12.737/2012"],
+["J","Legislação Institucional","Lei 14.735/2023, LC 129/2004, Lei 2.250/2009, LC 39/1993"],
+["P","Criminalística I","Conceitos, local de crime, vestígios, cadeia de custódia, laudo e quesitos"],
+["P","Criminalística II","Balística, documentoscopia, perícia de trânsito e de incêndio"],
+["P","Medicina legal e ética","Noções de medicina legal, Lei 12.030/2009, ética do perito"],
+["B","Realidade do Acre I","Formação histórica, ciclos da borracha, Revolução Acreana, Tratado de Petrópolis"],
+["B","Realidade do Acre II","Geografia, povos indígenas, economia, Constituição estadual, segurança pública e fronteira"],
+["B","Noções de Informática","Windows 11 e Linux, Word e Writer, Excel e Calc, e-mail, nuvem, segurança"],
+["E","Revisão dirigida","Refazer questões erradas do caderno de erros e reler os pontos fracos"]];
+const GN={E:"Informática Forense",P:"Perito Criminal (comum)",J:"Jurídicas",B:"Básicas"};
+const KEY={"2026-12-14":"Fim inscrições","2026-12-15":"Pagar taxa","2027-01-15":"Locais","2027-01-24":"PROVA"};
+let S={done:{},wk:"19:00",we:"09:00",sel:null,theme:""};
+try{Object.assign(S,JSON.parse(localStorage.getItem("pcac")||"{}"))}catch(e){}
+const save=()=>{try{localStorage.setItem("pcac",JSON.stringify(S))}catch(e){}};
+const $=s=>document.querySelector(s),pad=n=>String(n).padStart(2,"0");
+const iso=d=>d.getFullYear()+"-"+pad(d.getMonth()+1)+"-"+pad(d.getDate());
+const D=[];let k=0;
+for(let i=0;i<61;i++){const d=new Date(2026,10,9+i),sun=d.getDay()==0;D.push({d,sun,t:sun?null:k++})}
+const blocks=i=>{const x=D[i];if(x.sun)return[["Simulado semanal: 50 questões, tempo cronometrado",90],["Corrigir e atualizar o caderno de erros",45],["Redação técnica de 20 a 30 linhas sobre Informática Forense",45]];
+const rv=[[1,"ontem"],[7,"7 dias"],[30,"30 dias"]].map(([n,l])=>{let j=i-n;while(j>=0&&D[j].sun)j--;return j>=0?T[D[j].t][1]+" ("+l+")":null}).filter(Boolean);
+return[["Teoria: "+T[x.t][1],90],["Questões do tema no estilo IDECAN",60],["Revisão espaçada"+(rv.length?": "+rv.join("; "):": caderno de erros"),30]]};
+const start=i=>{const w=D[i].d.getDay(),[h,m]=(w==0||w==6?S.we:S.wk).split(":").map(Number);return h*60+m};
+const hm=m=>pad(Math.floor(m/60)%24)+":"+pad(m%60);
+const today=Math.max(0,Math.min(60,Math.floor((new Date()-new Date(2026,10,9))/864e5)));
+if(S.sel==null)S.sel=today;
+const st=i=>{const b=blocks(i),n=b.filter((_,j)=>S.done[i+"."+j]).length;return n==3?"full":n?"part":""};
+function render(){
+ let mins=0,tot=0,streak=0;
+ D.forEach((_,i)=>blocks(i).forEach((b,j)=>{tot+=b[1];if(S.done[i+"."+j])mins+=b[1]}));
+ for(let i=Math.min(today,60);i>=0;i--){if(st(i)=="full")streak++;else if(i<today)break}
+ const dl=Math.ceil((new Date(2027,0,24)-new Date())/864e5);
+ $("#stats").innerHTML=[[Math.max(dl,0),"dias para a prova"],[Math.round(mins/tot*100)+"%","do plano concluído"],[(mins/60).toFixed(1)+" h","estudadas de "+(tot/60)+" h"],[streak,"dias seguidos completos"]].map(([a,b])=>`<div class="card"><div class="big">${a}</div><div class="lab">${b}</div></div>`).join("");
+ const i=S.sel,x=D[i],b=blocks(i);let t=start(i);
+ const ds=x.d.toLocaleDateString("pt-BR",{weekday:"long",day:"numeric",month:"long"});
+ $("#day").innerHTML=`<h2>${i==today?"Hoje":"Dia selecionado"}: ${ds} <span class="sub">(dia ${i+1} de 61)</span></h2>`+(x.sun?`<div class="sub">Domingo: sem conteúdo novo. Consolide a semana.</div>`:`<div><span class="tag ${T[x.t][0]}">${GN[T[x.t][0]]}</span><span class="sub">${T[x.t][2]}</span></div>`)+
+ b.map((r,j)=>{const a=t;t+=r[1];return`<label class="blk ${S.done[i+"."+j]?"ok":""}"><input type="checkbox" data-k="${i}.${j}" ${S.done[i+"."+j]?"checked":""}><div><div class="t">${r[0]}</div><div class="tm">${hm(a)} às ${hm(t)} · ${r[1]} min</div></div></label>`}).join("");
+ const g={};T.forEach(r=>g[r[0]]=g[r[0]]||[0,0]);
+ D.forEach((y,n)=>{if(!y.sun){const q=g[T[y.t][0]];q[1]++;if(S.done[n+".0"])q[0]++}});
+ $("#subj").innerHTML="<h2>Teoria concluída por área</h2>"+Object.keys(g).map(c=>`<div class="${c}"><div style="color:var(--ink)">${GN[c]} <span class="lab">${g[c][0]} de ${g[c][1]} dias</span></div><div class="bar"><i style="width:${g[c][0]/g[c][1]*100}%"></i></div></div>`).join("")+`<div class="sub">Revisões nos dias 1, 7 e 30 após cada tema. Domingos: simulado e redação.</div>`;
+ let h="<h2>Calendário</h2>";
+ [[2026,10],[2026,11],[2027,0]].forEach(([y,m])=>{
+  const f=new Date(y,m,1),n=new Date(y,m+1,0).getDate();
+  h+=`<div class="mon"><h3>${f.toLocaleDateString("pt-BR",{month:"long",year:"numeric"})}</h3><div class="cal">`+"DSTQQSS".split("").map(c=>`<div class="dw">${c}</div>`).join("")+"<div></div>".repeat(f.getDay());
+  for(let d=1;d<=n;d++){const dt=new Date(y,m,d),idx=Math.round((dt-new Date(2026,10,9))/864e5),inn=idx>=0&&idx<61,key=KEY[iso(dt)];
+   const cl=["c",inn?(D[idx].sun?"gS":"g"+T[D[idx].t][0]):"out",inn?st(idx):"",inn&&idx==S.sel?"sel":"",inn&&idx==today&&new Date()<=new Date(2027,0,9)?"today":""].join(" ");
+   h+=`<button class="${cl}" ${inn?`data-d="${idx}"`:""} aria-label="${dt.toLocaleDateString("pt-BR")}">${d}${key?`<small>${key}</small>`:""}${inn&&!D[idx].sun?`<small style="color:var(--mut);font-weight:400">${T[D[idx].t][1].slice(0,13)}</small>`:""}</button>`}
+  h+="</div></div>"});
+ $("#cal").innerHTML=h+`<div class="sub"><span class="tag E">Informática Forense</span><span class="tag P">Perito comum</span><span class="tag J">Jurídicas</span><span class="tag B">Básicas</span> Entre 9 e 23 de janeiro ficam 16 dias de margem para revisão livre antes da prova.</div>`}
+document.addEventListener("click",e=>{const c=e.target.closest("[data-d]");if(c){S.sel=+c.dataset.d;save();render()}});
+document.addEventListener("change",e=>{const k=e.target.dataset&&e.target.dataset.k;if(k){e.target.checked?S.done[k]=1:delete S.done[k];save();render()}});
+$("#wk").value=S.wk;$("#we").value=S.we;
+$("#wk").onchange=e=>{S.wk=e.target.value||"19:00";save();render()};
+$("#we").onchange=e=>{S.we=e.target.value||"09:00";save();render()};
+const ap=()=>{if(S.theme)document.documentElement.dataset.theme=S.theme};
+if(!S.theme)S.theme="dark";ap();
+$("#th").onclick=()=>{S.theme=S.theme=="dark"?"light":"dark";ap();save()};
+$("#rs").onclick=()=>{if(confirm("Apagar todo o progresso marcado?")){S.done={};S.sel=today;save();render()}};
+render();
+</script></body></html>
