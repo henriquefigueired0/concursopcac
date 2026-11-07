@@ -1,8 +1,0 @@
-{
-  "name": "plano-pcac-perito-informatica",
-  "version": "1.0.0",
-  "description": "Dashboard de estudos para Perito Criminal, Informática Forense (PCAC), todo em JavaScript",
-  "main": "app.js",
-  "scripts": { "start": "node server.js" },
-  "license": "MIT"
-}
