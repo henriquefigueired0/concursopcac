@@ -1,34 +1,30 @@
 # Plano de estudos PCAC: Perito Criminal, Informática Forense
 
-Dashboard estático (HTML, CSS e JavaScript puro, sem dependências) com calendário de estudos e revisão para o concurso da Polícia Civil do Acre (Edital nº 001 SEAD/PCAC, banca IDECAN).
+Dashboard de estudos em JavaScript puro, sem dependências e sem arquivos HTML ou CSS. O arquivo `app.js` contém os estilos, a montagem da página, o conteúdo programático e a lógica.
 
-- Período: 09/11/2026 a 08/01/2027, 3 h por dia
-- Prova objetiva e discursiva: 24/01/2027
-- Blocos diários: teoria (90 min), questões (60 min) e revisão espaçada em 1, 7 e 30 dias (30 min)
-- Domingos: simulado, caderno de erros e redação técnica
-- Checklist por dia: três blocos, itens do conteúdo programático, questões feitas e acertos, e anotações
-- Mapa de setores: visão dos 61 dias por área, preenchidos conforme você conclui
-- Progresso salvo no navegador (`localStorage`), com exportar e importar em JSON
-- Botão **Baixar .ics** gera a agenda para importar no Google Calendar (fuso `America/Rio_Branco`)
+- Período: 09/11/2026 a 08/01/2027, 3 h por dia. Prova em 24/01/2027.
+- Checklist por dia: três blocos, itens do conteúdo, questões feitas e acertos, anotações.
+- Mapa de setores dos 61 dias, calendário e progresso por área.
+- Revisão espaçada em 1, 7 e 30 dias. Domingos: simulado e redação.
+- Progresso salvo no navegador, com exportar e importar em JSON.
+- **Baixar .ics** gera a agenda para o Google Calendar (fuso `America/Rio_Branco`).
 
-## Como usar
-
-Abra `index.html` no navegador. Não há build nem instalação.
-
-## Publicar no GitHub Pages
-
-1. Crie um repositório e envie estes arquivos (Add file, Upload files) na branch `main`.
-2. Em **Settings, Pages**, escolha **Source: GitHub Actions**.
-3. O workflow `.github/workflows/pages.yml` publica o site a cada push.
-
-## Estrutura
+## Como executar
 
 ```
-index.html
-assets/style.css   estilos e tema claro/escuro
-assets/data.js     temas e conteúdo programático
-assets/app.js      calendário, progresso, exportação e .ics
-.github/workflows/pages.yml
+node server.js
 ```
 
-Para editar temas ou datas, altere `assets/data.js` (`T`, `KEY`) e `assets/app.js` (data inicial `new Date(2026,10,9)` e 61 dias).
+Abra http://localhost:3000. O servidor só entrega `app.js` com uma linha de página mínima, gerada pelo próprio JavaScript.
+
+Sem Node: abra qualquer página em branco no navegador, cole o conteúdo de `app.js` no console e pressione Enter.
+
+## Arquivos
+
+```
+app.js        aplicação completa
+server.js     servidor local
+package.json  atalho npm start
+```
+
+Para editar temas e datas, procure `const T=[` (temas), `KEY` (datas-chave) e `new Date(2026,10,9)` (início do plano) em `app.js`.

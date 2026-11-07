@@ -1,0 +1,234 @@
+/* Plano de estudos PCAC: Perito Criminal, Informática Forense.
+   Arquivo único: estilos, estrutura da página, dados e lógica estão neste JavaScript. */
+(function () {
+"use strict";
+const CSS = `:root{box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px);
+--bg:#eef1f7;--panel:#fff;--panel2:#f4f6fb;--ink:#101a2e;--mut:#5a6a85;--line:#d8dfec;
+--E:#0b7fb5;--P:#7c4dd6;--J:#b86e00;--B:#1f8f5f;--hi:#0b7fb5;--ok:#1f8f5f;--tag:#e59a1d;color-scheme:light}
+:root[data-theme="dark"]{--bg:#0a1020;--panel:#121a2e;--panel2:#0d1426;--ink:#e9eefb;--mut:#92a3c4;--line:#22304d;--E:#56c8f5;--P:#b496ff;--J:#ffb547;--B:#58d6a0;--hi:#56c8f5;--ok:#58d6a0;--tag:#ffb547;color-scheme:dark}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#0a1020;--panel:#121a2e;--panel2:#0d1426;--ink:#e9eefb;--mut:#92a3c4;--line:#22304d;--E:#56c8f5;--P:#b496ff;--J:#ffb547;--B:#58d6a0;--hi:#56c8f5;--ok:#58d6a0;--tag:#ffb547;color-scheme:dark}}
+html{scroll-padding-top:env(safe-area-inset-top,0px)}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font:15px/1.55 ui-sans-serif,system-ui,-apple-system,"Segoe UI",Roboto,sans-serif}
+.wrap{max-width:1180px;margin:0 auto;padding:20px 16px 40px}
+h1,h2,h3{font-family:"Iowan Old Style","Palatino Linotype",Palatino,Georgia,serif;font-weight:700;letter-spacing:-.01em}
+h1{font-size:28px;line-height:1.15;margin:0 0 4px}
+h2{font-size:19px;margin:0 0 12px}
+.mono,.big,.tm{font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace}
+.sub{color:var(--mut);font-size:13.5px}
+.top{display:flex;justify-content:space-between;align-items:flex-end;gap:16px;flex-wrap:wrap;margin-bottom:18px}
+.set{display:flex;gap:8px;flex-wrap:wrap;align-items:center;font-size:13px;color:var(--mut)}
+.set label{display:flex;gap:6px;align-items:center}
+.b,input[type=time],input[type=number],textarea{font:inherit;font-size:13px;background:var(--panel);color:var(--ink);border:1px solid var(--line);border-radius:8px;padding:6px 10px}
+.b{cursor:pointer}.b:hover{border-color:var(--hi)}
+.b.pri{background:var(--hi);border-color:var(--hi);color:var(--bg);font-weight:600}
+.card{background:var(--panel);border:1px solid var(--line);border-radius:16px;padding:18px}
+.stats{display:grid;grid-template-columns:repeat(5,1fr);gap:12px;margin-bottom:14px}
+.stat{padding:14px 16px;border-radius:12px}
+.big{font-size:30px;font-weight:700;line-height:1.1;color:var(--ink)}
+.lab{font-size:12.5px;color:var(--mut)}
+.stat.first{background:var(--hi);border-color:var(--hi)}.stat.first .big,.stat.first .lab{color:var(--bg)}
+.map{display:grid;grid-template-columns:repeat(auto-fill,minmax(26px,1fr));gap:5px;margin:4px 0 12px}
+.s{aspect-ratio:1;border-radius:5px;border:1.5px solid var(--gc);background:transparent;cursor:pointer;padding:0}
+.s.part{background:linear-gradient(135deg,var(--gc) 50%,transparent 50%)}.s.full{background:var(--gc)}
+.s.sel,.c.sel{outline:2px solid var(--ink);outline-offset:2px}
+.gE{--gc:var(--E)}.gP{--gc:var(--P)}.gJ{--gc:var(--J)}.gB{--gc:var(--B)}.gS{--gc:var(--mut)}
+.leg{display:flex;gap:14px;flex-wrap:wrap;font-size:12.5px;color:var(--mut)}
+.leg i{display:inline-block;width:11px;height:11px;border-radius:3px;margin-right:5px;vertical-align:-1px;background:var(--gc)}
+.grid{display:grid;grid-template-columns:minmax(0,5fr) minmax(0,6fr);gap:14px;margin-top:14px}
+.col{display:flex;flex-direction:column;gap:14px;min-width:0}
+.dayhead{display:flex;gap:14px;align-items:center;margin-bottom:10px}
+.dn{font-size:38px;font-weight:700;color:var(--gc);line-height:1}
+.chip{display:inline-block;font-size:12.5px;padding:2px 10px;border-radius:99px;border:1px solid var(--gc);color:var(--gc);margin:0 6px 4px 0}
+.blk{display:flex;gap:12px;padding:12px 0;border-top:1px solid var(--line);cursor:pointer}
+.blk input,.sl input{appearance:none;width:22px;height:22px;flex:none;margin:1px 0 0;border:2px solid var(--mut);border-radius:6px;background:var(--panel2);cursor:pointer;display:grid;place-content:center}
+.blk input:checked,.sl input:checked{background:var(--ok);border-color:var(--ok)}
+.blk input:checked::after,.sl input:checked::after{content:"";width:6px;height:11px;border:solid var(--bg);border-width:0 2.5px 2.5px 0;transform:rotate(45deg) translate(-1px,-1px)}
+.blk.ok .t{color:var(--mut);text-decoration:line-through}
+.t{font-weight:600}.tm{font-size:12px;color:var(--mut)}
+details{margin:2px 0 0 34px}summary{cursor:pointer;font-size:13.5px;color:var(--hi);padding:4px 0}
+.sl{display:flex;gap:10px;align-items:flex-start;padding:5px 0;font-size:14px;cursor:pointer}
+.sl input{width:18px;height:18px;border-radius:5px}.sl.ok span{color:var(--mut);text-decoration:line-through}
+.rv{display:flex;gap:6px;flex-wrap:wrap;margin:6px 0 0 34px}
+.rv span{font-size:12.5px;padding:2px 9px;border-radius:99px;background:var(--panel2);border:1px solid var(--line);color:var(--mut)}
+.qrow{display:flex;gap:12px;align-items:center;flex-wrap:wrap;padding:12px 0;border-top:1px solid var(--line);font-size:13.5px}
+.qrow input[type=number]{width:72px}
+textarea{width:100%;min-height:64px;resize:vertical;margin-top:8px}
+.bar{height:9px;background:var(--panel2);border:1px solid var(--line);border-radius:6px;overflow:hidden;margin:4px 0 12px}
+.bar i{display:block;height:100%;background:var(--gc)}
+.mon{margin-bottom:18px}.mon h3{font-size:16px;margin:0 0 8px;text-transform:capitalize}
+.cal{display:grid;grid-template-columns:repeat(7,1fr);gap:5px}
+.dw{font-size:11.5px;color:var(--mut);text-align:center}
+.c{font:inherit;font-size:13px;position:relative;min-height:52px;padding:5px 6px;border:1px solid var(--line);border-radius:8px;background:var(--panel2);color:var(--ink);text-align:left;cursor:pointer;border-bottom:3px solid var(--gc,var(--line))}
+.c.out{opacity:.32;cursor:default}
+.c.full{background:color-mix(in srgb,var(--ok) 20%,var(--panel2))}.c.full::after{content:"✓";position:absolute;top:3px;right:6px;color:var(--ok);font-weight:700}
+.c.part{background:color-mix(in srgb,var(--tag) 16%,var(--panel2))}
+.c.today{border-color:var(--hi);box-shadow:inset 0 0 0 1px var(--hi)}
+.c small{display:block;font-size:10.5px;line-height:1.15;color:var(--mut);margin-top:2px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.c small.k{color:var(--tag);font-weight:700}
+table{width:100%;border-collapse:collapse;font-size:13.5px}td,th{padding:6px 8px;border-top:1px solid var(--line);text-align:left;vertical-align:top}
+:focus-visible{outline:2px solid var(--hi);outline-offset:2px}
+@media(max-width:860px){.grid{grid-template-columns:1fr}.stats{grid-template-columns:repeat(2,1fr)}.c small:not(.k){display:none}h1{font-size:23px}}
+@media(prefers-reduced-motion:no-preference){.blk input,.sl input{transition:background .15s,border-color .15s}}
+`;
+const SHELL = `<div class="wrap">
+<div class="top"><div><h1>Plano de estudos: Perito Criminal, Informática Forense</h1>
+<div class="sub">Polícia Civil do Acre, Edital 001/2026. De 9 de novembro de 2026 a 8 de janeiro de 2027, 3 h por dia. Prova em 24 de janeiro de 2027.</div></div>
+<div class="set"><label>Dias úteis <input type="time" id="wk"></label><label>Fins de semana <input type="time" id="we"></label>
+<button class="b pri" id="ics">Baixar .ics</button><button class="b" id="ex">Exportar</button><button class="b" id="im">Importar</button><input type="file" id="fi" accept="application/json" hidden><button class="b" id="th">Tema</button><button class="b" id="rs">Zerar</button></div></div>
+<div class="stats" id="stats"></div>
+<div class="card"><h2>Mapa de setores</h2><div id="map"></div></div>
+<div class="grid"><div class="col"><div class="card" id="day"></div><div class="card" id="subj"></div>
+<div class="card"><h2>Peso da prova objetiva</h2>
+<table><tr><th>Bloco</th><th>Questões</th><th>Pontos</th></tr>
+<tr><td>Conhecimentos específicos (peso 2)</td><td>60</td><td>120</td></tr>
+<tr><td>Básicos: português 6, lógica 6, informática 8, Acre 4</td><td>24</td><td>24</td></tr>
+<tr><td>Jurídicos: constitucional 3, administrativo 3, penal e processo penal 6, institucional 4</td><td>16</td><td>16</td></tr></table>
+<p class="sub">Aprovação: 50% dos pontos, 1 ponto em cada disciplina básica e jurídica e 2 pontos nos específicos. A discursiva (20 a 30 linhas) vale 40 pontos.</p></div></div>
+<div class="card" id="cal"></div></div></div>`;
+
+document.documentElement.lang = "pt-BR";
+document.title = "Plano de estudos PCAC – Perito Informática Forense";
+if (!document.body) document.documentElement.appendChild(document.createElement("body"));
+const meta = document.createElement("meta");
+meta.name = "viewport";
+meta.content = "width=device-width, initial-scale=1, viewport-fit=cover";
+document.head.appendChild(meta);
+const style = document.createElement("style");
+style.textContent = CSS;
+document.head.appendChild(style);
+document.body.innerHTML = SHELL;
+
+const T=[
+["E","Hardware","Placas-mãe, processadores, memórias, armazenamento, interfaces de E/S, alimentação"],
+["E","Fundamentos I","Arquitetura, sistemas operacionais (kernel, memória, arquivos, E/S), multicore, GPU e CUDA"],
+["E","Fundamentos II","Virtualização, contêineres, RAID, sistemas distribuídos, computação quântica"],
+["E","Sistemas de arquivos","NTFS, FAT32, exFAT, EXT3, EXT4 e XFS: organização e metadados"],
+["B","Língua Portuguesa I","Interpretação, coesão e coerência, reescrita, significação de palavras"],
+["B","Raciocínio Lógico I","Proposições, conectivos, tabelas-verdade, equivalências, argumentação"],
+["E","Windows I","Desktop e Server, usuários, permissões, registro do Windows"],
+["E","Windows II","Log de eventos do Windows, BitLocker"],
+["E","Linux I","Características, usuários, permissões, shell e comandos"],
+["E","Linux II","Configuração, administração, logs e serviços (proxy, e-mail, web, arquivos)"],
+["E","Estruturas de dados I","Listas, filas, pilhas e árvores"],
+["E","Estruturas de dados II","Busca, inserção, ordenação, complexidade, autômatos"],
+["E","Bancos de dados I","Arquitetura, modelos lógicos e físico, SGBDs relacionais, multidimensionais"],
+["E","Bancos de dados II","SQL, transações e análise de logs, NoSQL"],
+["J","Direito Constitucional","Direitos e garantias, Administração Pública (arts. 37 a 41), art. 144, Constituição do Acre"],
+["E","Linguagens I","Orientação a objetos, procedurais, compiladores e interpretadores, C e Java"],
+["E","Linguagens II","JavaScript, Python, HTML, XML, JSON, APIs REST e GraphQL, SonarQube"],
+["E","Redes I","Tipos, tecnologias e topologias, comutação, elementos de interconexão"],
+["E","Redes II","OSI e TCP/IP, Ethernet, redes sem fio, IP, TCP, UDP, ARP, DNS, DHCP, ICMP"],
+["E","Redes III","TLS, SSL, SSH, HTTP(S), e-mail, OSPF, BGP, deep e dark web, Tor, nuvem"],
+["B","Língua Portuguesa II","Sintaxe, concordância, regência, crase, pontuação, colocação pronominal"],
+["E","Segurança da informação I","ISO 27001 e 27002, desenvolvimento seguro (SDL, CLASP, OWASP Top 10), contêineres"],
+["E","Segurança da informação II","Autenticação e autorização (SSO, SAML, OAuth, FIDO2, MFA), malware"],
+["E","Segurança da informação III","OSINT, esteganografia, recuperação de dados, nuvem AWS, Azure e Google Cloud"],
+["E","Engenharia reversa I","Descompilação, debuggers, linguagem Assembly"],
+["E","Engenharia reversa II","Análise de código malicioso, ofuscação, compactadores, polimórfico, sandboxing"],
+["E","Segurança de redes I","Firewall, IDS e IPS, antivírus, EDR, XDR, SOAR, SIEM, NAT, proxy, VPN"],
+["E","Segurança de redes II","IPSEC, DNSSEC, DMARC, DKIM, SPF, análise de tráfego, Wi-Fi (WPA3, 802.1X)"],
+["E","Segurança de redes III","DoS, DDoS, spoofing, XSS, SQL injection, MITRE ATT&CK, CIS, NIST, APT"],
+["E","Criptografia I","Simétrica e assimétrica, RSA, AES, ECC, modos de operação"],
+["E","Criptografia II","Hashes, Diffie-Hellman, certificação digital, criptoanálise, protocolo Signal"],
+["B","Raciocínio Lógico II","Conjuntos, porcentagem, juros, combinatória, probabilidade, tabelas e gráficos"],
+["J","Direito Administrativo","Princípios, organização, poderes, atos, agentes, responsabilidade civil, improbidade"],
+["E","Sistemas móveis I","Android: arquitetura, permissões, sandboxing, criptografia"],
+["E","Sistemas móveis II","iOS: segurança, memória e processos, sistemas de arquivos"],
+["J","Penal e Processo Penal I","Teoria do crime, crimes contra a pessoa, patrimônio, fé pública e administração pública"],
+["J","Penal e Processo Penal II","Inquérito, provas e perícias (arts. 155 a 184 do CPP), cadeia de custódia, prisões"],
+["E","Computação forense I","Crimes cibernéticos e seus vestígios, identificação e isolamento"],
+["E","Computação forense II","Preservação e coleta de vestígio digital"],
+["E","Computação forense III","Cadeia de custódia do vestígio digital"],
+["E","Computação forense IV","Principais exames em computação forense, laudo e quesitos"],
+["E","Criptomoedas","Blockchain, Bitcoin, stablecoins, altcoins, hard e cold wallets"],
+["E","Inteligência Artificial","Aprendizado de máquina, deep learning, LLMs, IA generativa, deepfakes"],
+["E","Governança de TI","ITIL 4 e contratações de TI (Lei 14.133/2021)"],
+["E","Legislação digital","Marco Civil (Lei 12.965/2014), LGPD (Lei 13.709/2018), Lei 12.737/2012"],
+["J","Legislação Institucional","Lei 14.735/2023, LC 129/2004, Lei 2.250/2009, LC 39/1993"],
+["P","Criminalística I","Conceitos, local de crime, vestígios, cadeia de custódia, laudo e quesitos"],
+["P","Criminalística II","Balística, documentoscopia, perícia de trânsito e de incêndio"],
+["P","Medicina legal e ética","Noções de medicina legal, Lei 12.030/2009, ética do perito"],
+["B","Realidade do Acre I","Formação histórica, ciclos da borracha, Revolução Acreana, Tratado de Petrópolis"],
+["B","Realidade do Acre II","Geografia, povos indígenas, economia, Constituição estadual, segurança pública e fronteira"],
+["B","Noções de Informática","Windows 11 e Linux, Word e Writer, Excel e Calc, e-mail, nuvem, segurança"],
+["E","Revisão dirigida","Refazer questões erradas do caderno de erros e reler os pontos fracos"]];
+const GN={E:"Informática Forense",P:"Perito Criminal (comum)",J:"Jurídicas",B:"Básicas"};
+const KEY={"2026-12-14":"Fim inscrições","2026-12-15":"Pagar taxa","2027-01-15":"Locais","2027-01-24":"PROVA"};
+
+let S={done:{},sub:{},q:{},note:{},wk:"19:00",we:"09:00",sel:null,theme:""};
+try{Object.assign(S,JSON.parse(localStorage.getItem("pcac")||"{}"))}catch(e){}
+const save=()=>{try{localStorage.setItem("pcac",JSON.stringify(S))}catch(e){}};
+const $=s=>document.querySelector(s),pad=n=>String(n).padStart(2,"0");
+const iso=d=>d.getFullYear()+"-"+pad(d.getMonth()+1)+"-"+pad(d.getDate());
+const D=[];let k=0;
+for(let i=0;i<61;i++){const d=new Date(2026,10,9+i),sun=d.getDay()==0;D.push({d,sun,t:sun?null:k++})}
+const parts=s=>{const r=[];let d=0,c="";for(const ch of s){if(ch=="(")d++;if(ch==")")d--;if(ch==","&&!d){r.push(c.trim());c=""}else c+=ch}r.push(c.trim());return r.filter(Boolean)};
+const SUN=["Resolver 50 questões em tempo cronometrado","Revisar cada erro e anotar o motivo","Escrever 20 a 30 linhas e conferir com o conteúdo programático"];
+const subs=i=>D[i].sun?SUN:parts(T[D[i].t][2]);
+const rev=i=>[[1,"ontem"],[7,"7 dias"],[30,"30 dias"]].map(([n,l])=>{let j=i-n;while(j>=0&&D[j].sun)j--;return j>=0?T[D[j].t][1]+" ("+l+")":null}).filter(Boolean);
+const blocks=i=>D[i].sun?[["Simulado semanal",90],["Corrigir e atualizar o caderno de erros",45],["Redação técnica sobre Informática Forense",45]]:[["Teoria: "+T[D[i].t][1],90],["Questões do tema no estilo IDECAN",60],["Revisão espaçada",30]];
+const start=i=>{const w=D[i].d.getDay(),[h,m]=(w==0||w==6?S.we:S.wk).split(":").map(Number);return h*60+m};
+const hm=m=>pad(Math.floor(m/60)%24)+":"+pad(m%60);
+const st=i=>{const n=[0,1,2].filter(j=>S.done[i+"."+j]).length;return n==3?"full":n?"part":""};
+const gc=i=>D[i].sun?"gS":"g"+T[D[i].t][0];
+const real=Math.floor((new Date()-new Date(2026,10,9))/864e5),today=Math.max(0,Math.min(60,real));
+if(S.sel==null)S.sel=today;
+function render(){
+ let mins=0,tot=0,streak=0,qf=0,qa=0;
+ D.forEach((_,i)=>{blocks(i).forEach((b,j)=>{tot+=b[1];if(S.done[i+"."+j])mins+=b[1]});const q=S.q[i];if(q){qf+=+q[0]||0;qa+=+q[1]||0}});
+ for(let i=today;i>=0;i--){if(st(i)=="full")streak++;else if(i<today)break}
+ const dl=Math.ceil((new Date(2027,0,24)-new Date())/864e5);
+ $("#stats").innerHTML=[[Math.max(dl,0),"dias para a prova","first"],[Math.round(mins/tot*100)+"%","do plano concluído"],[(mins/60).toFixed(1)+" h","estudadas de "+tot/60+" h"],[streak,"dias seguidos completos"],[qf?Math.round(qa/qf*100)+"%":"–",qf?"de acerto em "+qf+" questões":"de acerto nas questões"]].map(([a,b,c])=>`<div class="card stat ${c||""}"><div class="big">${a}</div><div class="lab">${b}</div></div>`).join("");
+ $("#map").innerHTML=`<div class="map">`+D.map((x,i)=>`<button class="s ${gc(i)} ${st(i)} ${i==S.sel?"sel":""}" data-d="${i}" aria-label="Dia ${i+1}: ${x.sun?"domingo":T[x.t][1]}" title="${x.d.toLocaleDateString("pt-BR")}: ${x.sun?"Simulado":T[x.t][1]}"></button>`).join("")+`</div><div class="leg"><span class="gE"><i></i>Informática Forense</span><span class="gP"><i></i>Perito comum</span><span class="gJ"><i></i>Jurídicas</span><span class="gB"><i></i>Básicas</span><span class="gS"><i></i>Domingo</span><span>Metade preenchida: dia em andamento</span></div>`;
+ const i=S.sel,x=D[i],b=blocks(i),sl=subs(i);let t=start(i);
+ const ds=x.d.toLocaleDateString("pt-BR",{weekday:"long",day:"numeric",month:"long"});
+ const nsub=sl.filter((_,n)=>S.sub[i+"."+n]).length,q=S.q[i]||["",""];
+ $("#day").innerHTML=`<div class="dayhead ${gc(i)}"><div class="dn mono">${pad(i+1)}</div><div><h2 style="margin:0">${i==real?"Hoje, ":""}${ds}</h2><div class="sub">Dia ${i+1} de 61${x.sun?"":`<span class="chip ${gc(i)}" style="margin-left:8px">${GN[T[x.t][0]]}</span>`}</div></div></div>`+
+ b.map((r,j)=>{const a=t;t+=r[1];const key=i+"."+j;
+  return`<label class="blk ${S.done[key]?"ok":""}"><input type="checkbox" data-k="${key}" ${S.done[key]?"checked":""}><div><div class="t">${r[0]}</div><div class="tm">${hm(a)} às ${hm(t)}, ${r[1]} min</div></div></label>`+
+  (j==0?`<details open><summary>Itens do conteúdo: ${nsub} de ${sl.length}</summary>`+sl.map((s,n)=>`<label class="sl ${S.sub[i+"."+n]?"ok":""}"><input type="checkbox" data-s="${i}.${n}" ${S.sub[i+"."+n]?"checked":""}><span>${s}</span></label>`).join("")+`<button class="b" data-all="${i}" style="margin:6px 0">${nsub==sl.length?"Desmarcar todos":"Marcar todos"}</button></details>`:"")+
+  (j==2&&!x.sun?`<div class="rv">${rev(i).map(r=>`<span>${r}</span>`).join("")||"<span>Caderno de erros</span>"}</div>`:"")}).join("")+
+ `<div class="qrow"><span>Questões do dia</span><label>feitas <input type="number" min="0" max="500" data-q="0" data-i="${i}" value="${q[0]}"></label><label>acertos <input type="number" min="0" max="500" data-q="1" data-i="${i}" value="${q[1]}"></label></div><textarea data-n="${i}" placeholder="Anotações do dia: dúvidas, pontos fracos, ideias de flashcards" aria-label="Anotações do dia">${(S.note[i]||"").replace(/</g,"&lt;")}</textarea>`;
+ const g={};T.forEach(r=>g[r[0]]=g[r[0]]||[0,0]);
+ D.forEach((y,n)=>{if(!y.sun){const z=g[T[y.t][0]];z[1]++;if(S.done[n+".0"])z[0]++}});
+ $("#subj").innerHTML="<h2>Teoria concluída por área</h2>"+Object.keys(g).map(c=>`<div class="g${c}"><div>${GN[c]} <span class="lab">${g[c][0]} de ${g[c][1]} dias</span></div><div class="bar"><i style="width:${g[c][0]/g[c][1]*100}%"></i></div></div>`).join("")+`<div class="sub">Cada tema volta em revisão 1, 7 e 30 dias depois. Domingos: simulado e redação.</div>`;
+ let h="<h2>Calendário</h2>";
+ [[2026,10],[2026,11],[2027,0]].forEach(([y,m])=>{
+  const f=new Date(y,m,1),n=new Date(y,m+1,0).getDate();
+  h+=`<div class="mon"><h3>${f.toLocaleDateString("pt-BR",{month:"long",year:"numeric"})}</h3><div class="cal">`+"DSTQQSS".split("").map(c=>`<div class="dw">${c}</div>`).join("")+"<div></div>".repeat(f.getDay());
+  for(let d=1;d<=n;d++){const dt=new Date(y,m,d),idx=Math.round((dt-new Date(2026,10,9))/864e5),inn=idx>=0&&idx<61,key=KEY[iso(dt)];
+   const cl=["c",inn?gc(idx):"out",inn?st(idx):"",inn&&idx==S.sel?"sel":"",iso(dt)==iso(new Date())?"today":""].join(" ");
+   h+=`<button class="${cl}" ${inn?`data-d="${idx}"`:""} aria-label="${dt.toLocaleDateString("pt-BR")}">${d}${key?`<small class="k">${key}</small>`:""}${inn&&!D[idx].sun?`<small>${T[D[idx].t][1]}</small>`:""}</button>`}
+  h+="</div></div>"});
+ $("#cal").innerHTML=h+`<div class="sub">Entre 9 e 23 de janeiro ficam 16 dias de margem para revisão livre antes da prova.</div>`}
+document.addEventListener("click",e=>{const c=e.target.closest("[data-d]");if(c&&!c.classList.contains("out")){S.sel=+c.dataset.d;save();render();return}
+ const a=e.target.closest("[data-all]");if(a){const i=+a.dataset.all,l=subs(i),all=l.every((_,n)=>S.sub[i+"."+n]);l.forEach((_,n)=>all?delete S.sub[i+"."+n]:S.sub[i+"."+n]=1);save();render()}});
+document.addEventListener("change",e=>{const d=e.target.dataset||{};
+ if(d.k){e.target.checked?S.done[d.k]=1:delete S.done[d.k]}
+ else if(d.s){e.target.checked?S.sub[d.s]=1:delete S.sub[d.s]}
+ else if(d.q){const q=S.q[d.i]||["",""];q[d.q]=e.target.value;S.q[d.i]=q}
+ else return;
+ save();render()});
+document.addEventListener("input",e=>{if(e.target.dataset&&e.target.dataset.n!=null){S.note[e.target.dataset.n]=e.target.value;save()}});
+$("#wk").value=S.wk;$("#we").value=S.we;
+$("#wk").onchange=e=>{S.wk=e.target.value||"19:00";save();render()};
+$("#we").onchange=e=>{S.we=e.target.value||"09:00";save();render()};
+const ap=()=>{if(S.theme)document.documentElement.dataset.theme=S.theme};
+if(!S.theme)S.theme="dark";ap();
+$("#th").onclick=()=>{S.theme=S.theme=="dark"?"light":"dark";ap();save()};
+$("#rs").onclick=()=>{if(confirm("Apagar todo o progresso, questões e anotações?")){S.done={};S.sub={};S.q={};S.note={};S.sel=today;save();render()}};
+function dl(n,c,t){const a=document.createElement("a");a.href=URL.createObjectURL(new Blob([c],{type:t}));a.download=n;document.body.appendChild(a);a.click();a.remove()}
+$("#ex").onclick=()=>dl("progresso-pcac.json",JSON.stringify({done:S.done,sub:S.sub,q:S.q,note:S.note,wk:S.wk,we:S.we}),"application/json");
+$("#im").onclick=()=>$("#fi").click();
+$("#fi").onchange=e=>{const f=e.target.files[0];if(!f)return;const r=new FileReader();
+ r.onload=()=>{try{const j=JSON.parse(r.result);["done","sub","q","note"].forEach(c=>S[c]=j[c]||{});S.wk=j.wk||S.wk;S.we=j.we||S.we;$("#wk").value=S.wk;$("#we").value=S.we;save();render()}catch(x){alert("Arquivo inválido.")}};r.readAsText(f)};
+$("#ics").onclick=()=>{
+ const f=(d,m)=>d.getFullYear()+pad(d.getMonth()+1)+pad(d.getDate())+"T"+pad(Math.floor(m/60))+pad(m%60)+"00";
+ let o="BEGIN:VCALENDAR\r\nVERSION:2.0\r\nPRODID:-//PCAC Plano de Estudos//PT\r\nCALSCALE:GREGORIAN\r\nX-WR-TIMEZONE:America/Rio_Branco\r\n";
+ D.forEach((x,i)=>{let t=start(i);blocks(i).forEach((b,j)=>{const a=t;t+=b[1];
+  o+="BEGIN:VEVENT\r\nUID:pcac-"+i+"-"+j+"@plano-pcac\r\nDTSTAMP:20261107T000000Z\r\nDTSTART;TZID=America/Rio_Branco:"+f(x.d,a)+"\r\nDTEND;TZID=America/Rio_Branco:"+f(x.d,t)+"\r\nSUMMARY:"+b[0].replace(/[,;]/g," ")+"\r\nDESCRIPTION:PCAC Perito Informática Forense, dia "+(i+1)+" de 61\r\nEND:VEVENT\r\n"})});
+ dl("plano-pcac.ics",o+"END:VCALENDAR\r\n","text/calendar")};
+render();
+
+})();
